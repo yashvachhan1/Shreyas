@@ -21,11 +21,13 @@ const StaffRoles = () => {
     setTeacherAssignments(teacherAssignments.filter((_, i) => i !== index));
   };
 
+  const [selectedStaff, setSelectedStaff] = useState<any>(null);
+
   const [staffList] = useState([
-    { id: 1, name: 'Vikram Singh', role: 'Super Admin', email: 'admin@edu.com', assignedTo: 'All Classes' },
-    { id: 2, name: 'Anita Desai', role: 'Class Teacher', email: 'anita@edu.com', assignedTo: 'Class 10 - A' },
-    { id: 3, name: 'Karan Patel', role: 'Class Teacher', email: 'karan@edu.com', assignedTo: 'Class 9 - B' },
-    { id: 4, name: 'Megha Roy', role: 'Subject Teacher', email: 'megha@edu.com', assignedTo: 'Class 11, 12 (Science)' },
+    { id: 1, name: 'Vikram Singh', role: 'Super Admin', email: 'admin@edu.com', assignedTo: 'All Classes', totalStudents: 450, attendanceStatus: 'Completed', marksStatus: 'Completed' },
+    { id: 2, name: 'Anita Desai', role: 'Class Teacher', email: 'anita@edu.com', assignedTo: 'Class 10 - A', totalStudents: 45, attendanceStatus: 'Pending', marksStatus: 'Completed' },
+    { id: 3, name: 'Karan Patel', role: 'Class Teacher', email: 'karan@edu.com', assignedTo: 'Class 9 - B', totalStudents: 42, attendanceStatus: 'Completed', marksStatus: 'Pending (Mid-Term)' },
+    { id: 4, name: 'Megha Roy', role: 'Subject Teacher', email: 'megha@edu.com', assignedTo: 'Class 11, 12 (Science)', totalStudents: 120, attendanceStatus: 'N/A', marksStatus: 'Completed' },
   ]);
 
   return (
@@ -60,7 +62,7 @@ const StaffRoles = () => {
                 <tr 
                   key={staff.id} 
                   style={{ borderBottom: '1px solid var(--border-light)', cursor: 'pointer' }}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => setSelectedStaff(staff)}
                   className="table-row-hover"
                 >
                   <td style={{ padding: '1rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -195,6 +197,62 @@ const StaffRoles = () => {
                 <button type="submit" className="btn btn-primary">Create Staff Account</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {selectedStaff && (
+        <div className="modal-overlay" onClick={() => setSelectedStaff(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: selectedStaff.role.includes('Admin') ? '#fef2f2' : '#e0e7ff', color: selectedStaff.role.includes('Admin') ? '#b91c1c' : 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.25rem' }}>
+                  {selectedStaff.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 style={{ margin: 0, color: 'var(--text-primary)' }}>{selectedStaff.name}</h3>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{selectedStaff.email}</span>
+                </div>
+              </div>
+              <button className="btn" onClick={() => setSelectedStaff(null)} style={{ padding: '0.5rem' }}>
+                <X size={20} />
+              </button>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Role</div>
+                <div style={{ fontWeight: 600 }}>{selectedStaff.role}</div>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Assigned Classes</div>
+                <div style={{ fontWeight: 600 }}>{selectedStaff.assignedTo}</div>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Total Students</div>
+                <div style={{ fontWeight: 600 }}>{selectedStaff.totalStudents} Students</div>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Daily Attendance</div>
+                <div style={{ fontWeight: 600, color: selectedStaff.attendanceStatus === 'Completed' ? 'var(--success)' : selectedStaff.attendanceStatus === 'Pending' ? 'var(--warning)' : 'var(--text-secondary)' }}>
+                  {selectedStaff.attendanceStatus}
+                </div>
+              </div>
+            </div>
+
+            <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Marksheet Submission Status</div>
+              <div style={{ fontWeight: 600, color: selectedStaff.marksStatus === 'Completed' ? 'var(--success)' : selectedStaff.marksStatus.includes('Pending') ? 'var(--warning)' : 'var(--text-secondary)' }}>
+                {selectedStaff.marksStatus}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', borderTop: '1px solid var(--border-light)', paddingTop: '1.5rem' }}>
+              <button type="button" className="btn btn-secondary" onClick={() => setSelectedStaff(null)}>Close</button>
+              <button type="button" className="btn btn-primary" onClick={() => { setSelectedStaff(null); setIsModalOpen(true); }}>
+                Edit Permissions
+              </button>
+            </div>
           </div>
         </div>
       )}
