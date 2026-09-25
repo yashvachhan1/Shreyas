@@ -110,13 +110,15 @@ const TestsMarks = () => {
   if (activeTest) {
     return (
       <div className="tests-marks-module">
-        <header className="page-header" style={{ marginBottom: '1.5rem', gap: '1rem', flexWrap: 'wrap' }}>
-          <button className="btn" onClick={() => setActiveTest(null)} style={{ padding: '0.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-            <ChevronLeft size={20} />
-          </button>
-          <div>
-            <h1 style={{ margin: 0 }}>{activeTest.status === 'pending' ? 'Enter Marks' : 'View Results'}</h1>
-            <p className="text-secondary" style={{ margin: 0 }}>{activeTest.name} • Class {activeTest.class}-{activeTest.section} • {activeTest.subject}</p>
+        <header className="page-header" style={{ marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <button className="btn" onClick={() => setActiveTest(null)} style={{ padding: '0.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+              <ChevronLeft size={20} />
+            </button>
+            <div>
+              <h1 style={{ margin: 0 }}>{activeTest.status === 'pending' ? 'Enter Marks' : 'View Results'}</h1>
+              <p className="text-secondary" style={{ margin: 0 }}>{activeTest.name} • Class {activeTest.class}-{activeTest.section} • {activeTest.subject}</p>
+            </div>
           </div>
         </header>
 

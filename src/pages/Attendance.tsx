@@ -148,13 +148,15 @@ const Attendance = () => {
   // --- ATTENDANCE MARKING VIEW ---
   return (
     <div className="attendance-module">
-      <header className="page-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <button className="btn" onClick={() => setIsClassSelected(false)} style={{ padding: '0.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-          <ChevronLeft size={20} />
-        </button>
-        <div>
-          <h1 style={{ margin: 0 }}>Mark Attendance</h1>
-          <p className="text-secondary" style={{ margin: 0 }}>Class {selectedClass} - Section {selectedSection}</p>
+      <header className="page-header" style={{ marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button className="btn" onClick={() => setIsClassSelected(false)} style={{ padding: '0.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+            <ChevronLeft size={20} />
+          </button>
+          <div>
+            <h1 style={{ margin: 0 }}>Mark Attendance</h1>
+            <p className="text-secondary" style={{ margin: 0 }}>Class {selectedClass} - Section {selectedSection}</p>
+          </div>
         </div>
       </header>
 
