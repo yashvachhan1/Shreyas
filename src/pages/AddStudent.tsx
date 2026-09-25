@@ -72,12 +72,12 @@ const AddStudent = () => {
   };
 
   const downloadSampleCSV = () => {
-    const headers = ['firstName', 'lastName', 'grNumber', 'class', 'section', 'rollNo', 'parentName', 'whatsappNumber'];
+    const headers = ['firstName', 'lastName', 'grNumber', 'class', 'section', 'rollNo', 'parentName', 'whatsappNumber', 'imageFilename'];
     const csv = Papa.unparse({
       fields: headers,
       data: [
-        ['Rahul', 'Sharma', 'GR-101', '10', 'A', '45', 'Ramesh Sharma', '9876543210'],
-        ['Priya', 'Singh', 'GR-102', '9', 'B', '12', 'Rajesh Singh', '9123456780'],
+        ['Rahul', 'Sharma', 'GR-101', '10', 'A', '45', 'Ramesh Sharma', '9876543210', 'rahul_101.jpg'],
+        ['Priya', 'Singh', 'GR-102', '9', 'B', '12', 'Rajesh Singh', '9123456780', 'priya_102.png'],
       ]
     });
     
@@ -298,6 +298,7 @@ const AddStudent = () => {
                           <th style={{ padding: '0.75rem 1rem' }}>Class/Sec</th>
                           <th style={{ padding: '0.75rem 1rem' }}>Roll No.</th>
                           <th style={{ padding: '0.75rem 1rem' }}>WhatsApp</th>
+                          <th style={{ padding: '0.75rem 1rem' }}>Image File</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -308,6 +309,7 @@ const AddStudent = () => {
                             <td style={{ padding: '0.75rem 1rem' }}>{student.class} - {student.section}</td>
                             <td style={{ padding: '0.75rem 1rem' }}>{student.rollNo}</td>
                             <td style={{ padding: '0.75rem 1rem' }}>{student.whatsappNumber}</td>
+                            <td style={{ padding: '0.75rem 1rem', color: 'var(--text-secondary)' }}>{student.imageFilename || '-'}</td>
                           </tr>
                         ))}
                       </tbody>
