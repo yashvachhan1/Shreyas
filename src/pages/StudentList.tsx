@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter, Edit, Trash2, UserPlus, FileSpreadsheet } from 'lucide-react';
+import { Search, Filter, Edit, Trash2, UserPlus, FileSpreadsheet, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const StudentList = () => {
@@ -74,7 +74,11 @@ const StudentList = () => {
             <tbody>
               {students.map((student) => (
                 <tr key={student.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
-                  <td style={{ padding: '1rem', fontWeight: 600, color: 'var(--accent-primary)' }}>{student.grNumber}</td>
+                  <td style={{ padding: '1rem', fontWeight: 600 }}>
+                    <Link to={`/student/${student.id}`} style={{ color: 'var(--accent-primary)', textDecoration: 'none' }}>
+                      {student.grNumber}
+                    </Link>
+                  </td>
                   <td style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#e0e7ff', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
                       {student.name.charAt(0)}
@@ -87,6 +91,9 @@ const StudentList = () => {
                   <td style={{ padding: '1rem' }}>{student.whatsapp}</td>
                   <td style={{ padding: '1rem', textAlign: 'right' }}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
+                      <Link to={`/student/${student.id}`} className="btn" style={{ padding: '0.5rem', color: 'var(--accent-primary)' }} title="View Profile">
+                        <Eye size={16} />
+                      </Link>
                       <button className="btn" style={{ padding: '0.5rem', color: 'var(--text-secondary)' }} title="Edit">
                         <Edit size={16} />
                       </button>
