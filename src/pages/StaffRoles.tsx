@@ -1,12 +1,25 @@
 import { useState } from 'react';
-import { UserPlus, Shield, Edit, Trash2, X, CheckCircle, ShieldAlert } from 'lucide-react';
+import { UserPlus, Shield, Edit, Trash2, X, CheckCircle, ShieldAlert, Plus } from 'lucide-react';
 import CustomSelect from '../components/CustomSelect';
 
 const StaffRoles = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [roleType, setRoleType] = useState('Teacher');
-  const [assignedClass, setAssignedClass] = useState('');
-  const [assignedSection, setAssignedSection] = useState('');
+  const [teacherAssignments, setTeacherAssignments] = useState([{ class: '', section: '', subject: '' }]);
+
+  const updateAssignment = (index: number, field: string, value: string) => {
+    const updated = [...teacherAssignments];
+    updated[index] = { ...updated[index], [field]: value };
+    setTeacherAssignments(updated);
+  };
+
+  const addAssignment = () => {
+    setTeacherAssignments([...teacherAssignments, { class: '', section: '', subject: '' }]);
+  };
+
+  const removeAssignment = (index: number) => {
+    setTeacherAssignments(teacherAssignments.filter((_, i) => i !== index));
+  };
 
   const [staffList] = useState([
     { id: 1, name: 'Vikram Singh', role: 'Super Admin', email: 'admin@edu.com', assignedTo: 'All Classes' },
@@ -125,27 +138,49 @@ const StaffRoles = () => {
 
               {roleType === 'Teacher' && (
                 <div style={{ backgroundColor: 'var(--bg-primary)', padding: '1.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', marginBottom: '1.5rem' }}>
-                  <h4 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><CheckCircle size={18} color="var(--success)" /> Assign Class to Teacher</h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                    <div className="input-group" style={{ marginBottom: 0 }}>
-                      <label className="input-label">Select Class</label>
-                      <CustomSelect
-                        options={[{ value: '9', label: 'Class 9' }, { value: '10', label: 'Class 10' }]}
-                        value={assignedClass}
-                        onChange={setAssignedClass}
-                      />
-                    </div>
-                    <div className="input-group" style={{ marginBottom: 0 }}>
-                      <label className="input-label">Select Section</label>
-                      <CustomSelect
-                        options={[{ value: 'A', label: 'Section A' }, { value: 'B', label: 'Section B' }]}
-                        value={assignedSection}
-                        onChange={setAssignedSection}
-                      />
-                    </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}><CheckCircle size={18} color="var(--success)" /> Assign Classes to Teacher</h4>
+                    <button type="button" className="btn btn-secondary" onClick={addAssignment} style={{ padding: '0.25rem 0.75rem', fontSize: '0.8rem' }}>
+                      <Plus size={14} /> Add Another
+                    </button>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '1rem', fontStyle: 'italic' }}>
-                    * This teacher will only be able to view, mark attendance, and manage marks for students in the selected class and section.
+                  
+                  {teacherAssignments.map((assignment, index) => (
+                    <div key={index} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '1rem', alignItems: 'end', marginBottom: '1rem', paddingBottom: '1rem', borderBottom: index < teacherAssignments.length - 1 ? '1px dashed var(--border-light)' : 'none' }}>
+                      <div className="input-group" style={{ marginBottom: 0 }}>
+                        <label className="input-label">Class</label>
+                        <CustomSelect
+                          options={[{ value: '9', label: 'Class 9' }, { value: '10', label: 'Class 10' }, { value: '11', label: 'Class 11' }, { value: '12', label: 'Class 12' }]}
+                          value={assignment.class}
+                          onChange={(val) => updateAssignment(index, 'class', val)}
+                        />
+                      </div>
+                      <div className="input-group" style={{ marginBottom: 0 }}>
+                        <label className="input-label">Section</label>
+                        <CustomSelect
+                          options={[{ value: 'A', label: 'Section A' }, { value: 'B', label: 'Section B' }, { value: 'C', label: 'Section C' }, { value: 'All', label: 'All Sections' }]}
+                          value={assignment.section}
+                          onChange={(val) => updateAssignment(index, 'section', val)}
+                        />
+                      </div>
+                      <div className="input-group" style={{ marginBottom: 0 }}>
+                        <label className="input-label">Subject / Language</label>
+                        <CustomSelect
+                          options={[{ value: 'English', label: 'English' }, { value: 'Hindi', label: 'Hindi' }, { value: 'Gujarati', label: 'Gujarati' }, { value: 'Maths', label: 'Maths' }, { value: 'Science', label: 'Science' }, { value: 'All Subjects', label: 'All Subjects' }]}
+                          value={assignment.subject}
+                          onChange={(val) => updateAssignment(index, 'subject', val)}
+                        />
+                      </div>
+                      {teacherAssignments.length > 1 && (
+                        <button type="button" onClick={() => removeAssignment(index)} className="btn" style={{ padding: '0.75rem', color: 'var(--danger)', border: '1px solid var(--border-light)', backgroundColor: 'white' }} title="Remove this assignment">
+                          <Trash2 size={18} />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.5rem', fontStyle: 'italic' }}>
+                    * This teacher will only be able to view, mark attendance, and manage marks for students in the assigned classes and subjects.
                   </p>
                 </div>
               )}
