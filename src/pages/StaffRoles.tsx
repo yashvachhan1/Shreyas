@@ -57,7 +57,12 @@ const StaffRoles = () => {
             </thead>
             <tbody>
               {staffList.map((staff) => (
-                <tr key={staff.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
+                <tr 
+                  key={staff.id} 
+                  style={{ borderBottom: '1px solid var(--border-light)', cursor: 'pointer' }}
+                  onClick={() => setIsModalOpen(true)}
+                  className="table-row-hover"
+                >
                   <td style={{ padding: '1rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: staff.role.includes('Admin') ? '#fef2f2' : '#e0e7ff', color: staff.role.includes('Admin') ? '#b91c1c' : 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
                       {staff.name.charAt(0)}
@@ -72,8 +77,8 @@ const StaffRoles = () => {
                   </td>
                   <td style={{ padding: '1rem', fontWeight: 500 }}>{staff.assignedTo}</td>
                   <td style={{ padding: '1rem', textAlign: 'right' }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-                      <button className="btn" style={{ padding: '0.5rem', color: 'var(--text-secondary)' }} title="Edit Access">
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }} onClick={(e) => e.stopPropagation()}>
+                      <button className="btn" style={{ padding: '0.5rem', color: 'var(--text-secondary)' }} title="Edit Access" onClick={() => setIsModalOpen(true)}>
                         <Edit size={16} />
                       </button>
                       <button className="btn" style={{ padding: '0.5rem', color: 'var(--danger)' }} title="Remove Staff">
