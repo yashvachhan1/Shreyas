@@ -312,8 +312,8 @@ const Settings = () => {
 
       {/* CUSTOM DIALOG MODAL */}
       {dialog.isOpen && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }} onClick={closeDialog}>
-          <div className="card" style={{ width: '100%', maxWidth: '400px', animation: 'slideUp 0.3s ease', padding: '1.5rem' }} onClick={e => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={closeDialog}>
+          <div className="card modal-content" style={{ width: '100%', maxWidth: '400px', animation: 'slideUp 0.3s ease', padding: '1.5rem' }} onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.2rem' }}>{dialog.title}</h3>
               <button onClick={closeDialog} className="btn" style={{ padding: '0.5rem' }}><X size={20} /></button>
