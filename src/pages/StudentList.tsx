@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { Search, Filter, Edit, Trash2, UserPlus, FileSpreadsheet, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Search, Filter, Edit, Trash2, FileSpreadsheet } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StudentList = () => {
+  const navigate = useNavigate();
+  
   // Dummy data for preview
   const [students] = useState([
-    { id: 1, name: 'Rahul Sharma', grNumber: 'GR-101', class: '10', section: 'A', rollNo: '45', parent: 'Ramesh Sharma', whatsapp: '9876543210' },
-    { id: 2, name: 'Priya Singh', grNumber: 'GR-102', class: '9', section: 'B', rollNo: '12', parent: 'Rajesh Singh', whatsapp: '9123456780' },
-    { id: 3, name: 'Amit Kumar', grNumber: 'GR-103', class: '10', section: 'A', rollNo: '04', parent: 'Suresh Kumar', whatsapp: '9988776655' },
-    { id: 4, name: 'Neha Gupta', grNumber: 'GR-104', class: '11', section: 'C', rollNo: '21', parent: 'Alok Gupta', whatsapp: '9876543111' },
-    { id: 5, name: 'Rohan Verma', grNumber: 'GR-105', class: '12', section: 'A', rollNo: '33', parent: 'Vikash Verma', whatsapp: '9988112233' },
+    { id: 1, name: 'Rahul Sharma', grNumber: 'GR-101', class: '10', section: 'A', rollNo: '45', parent: 'Ramesh Sharma', whatsapp: '9876543210', image: 'https://i.pravatar.cc/150?u=rahul' },
+    { id: 2, name: 'Priya Singh', grNumber: 'GR-102', class: '9', section: 'B', rollNo: '12', parent: 'Rajesh Singh', whatsapp: '9123456780', image: 'https://i.pravatar.cc/150?u=priya' },
+    { id: 3, name: 'Amit Kumar', grNumber: 'GR-103', class: '10', section: 'A', rollNo: '04', parent: 'Suresh Kumar', whatsapp: '9988776655', image: 'https://i.pravatar.cc/150?u=amit' },
+    { id: 4, name: 'Neha Gupta', grNumber: 'GR-104', class: '11', section: 'C', rollNo: '21', parent: 'Alok Gupta', whatsapp: '9876543111', image: 'https://i.pravatar.cc/150?u=neha' },
+    { id: 5, name: 'Rohan Verma', grNumber: 'GR-105', class: '12', section: 'A', rollNo: '33', parent: 'Vikash Verma', whatsapp: '9988112233', image: 'https://i.pravatar.cc/150?u=rohan' },
   ]);
 
   return (
@@ -20,7 +22,7 @@ const StudentList = () => {
           <p className="text-secondary">Manage, view, and search all enrolled students.</p>
         </div>
         <Link to="/add-student" className="btn btn-primary" style={{ textDecoration: 'none' }}>
-          <UserPlus size={18} /> Add New Student
+          Add New Student
         </Link>
       </header>
 
@@ -73,16 +75,23 @@ const StudentList = () => {
             </thead>
             <tbody>
               {students.map((student) => (
-                <tr key={student.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
+                <tr 
+                  key={student.id} 
+                  style={{ borderBottom: '1px solid var(--border-light)', cursor: 'pointer' }}
+                  onClick={() => navigate(`/student/${student.id}`)}
+                  className="table-row-hover"
+                >
                   <td style={{ padding: '1rem', fontWeight: 600 }}>
-                    <Link to={`/student/${student.id}`} style={{ color: 'var(--accent-primary)', textDecoration: 'none' }}>
+                    <span style={{ color: 'var(--accent-primary)' }}>
                       {student.grNumber}
-                    </Link>
+                    </span>
                   </td>
                   <td style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#e0e7ff', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-                      {student.name.charAt(0)}
-                    </div>
+                    <img 
+                      src={student.image} 
+                      alt={student.name} 
+                      style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} 
+                    />
                     {student.name}
                   </td>
                   <td style={{ padding: '1rem' }}>{student.class} - {student.section}</td>
@@ -90,10 +99,7 @@ const StudentList = () => {
                   <td style={{ padding: '1rem' }}>{student.parent}</td>
                   <td style={{ padding: '1rem' }}>{student.whatsapp}</td>
                   <td style={{ padding: '1rem', textAlign: 'right' }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-                      <Link to={`/student/${student.id}`} className="btn" style={{ padding: '0.5rem', color: 'var(--accent-primary)' }} title="View Profile">
-                        <Eye size={16} />
-                      </Link>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }} onClick={(e) => e.stopPropagation()}>
                       <button className="btn" style={{ padding: '0.5rem', color: 'var(--text-secondary)' }} title="Edit">
                         <Edit size={16} />
                       </button>

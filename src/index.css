@@ -274,3 +274,7 @@ input, select, textarea {
   display: flex;
   flex-direction: column;
 }
+
+.btn-primary:hover { color: white !important; }
+
+.table-row-hover:hover { background-color: var(--bg-secondary); transition: background-color var(--transition-fast); }
