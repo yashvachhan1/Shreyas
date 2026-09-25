@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Calendar, Check, X, Clock, AlertCircle, Save, ChevronLeft } from 'lucide-react';
-import CustomSelect from '../components/CustomSelect';
+import { Calendar, Check, X, Clock, Save, ChevronLeft } from 'lucide-react';
 
 interface Student {
   id: number;
