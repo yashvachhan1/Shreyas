@@ -11,6 +11,7 @@ interface StudentData {
   rollNo: string;
   parentName: string;
   whatsappNumber: string;
+  imageFilename?: string;
 }
 
 const AddStudent = () => {
