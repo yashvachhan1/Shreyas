@@ -34,7 +34,7 @@ const StudentProfile = () => {
 
   return (
     <div className="student-profile relative">
-      <header className="page-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header className="page-header">
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <Link to="/students" className="btn btn-secondary" style={{ padding: '0.5rem', borderRadius: '50%' }}>
             <ArrowLeft size={20} />
@@ -173,22 +173,24 @@ const StudentProfile = () => {
                 <h3>Recent Absences</h3>
                 <span style={{ fontSize: '0.875rem', color: 'var(--danger)', fontWeight: 600 }}>Total Absent: 4 Days</span>
               </div>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                <thead>
-                  <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-light)' }}>
-                    <th style={{ padding: '0.75rem' }}>Date</th>
-                    <th style={{ padding: '0.75rem' }}>Status</th>
-                    <th style={{ padding: '0.75rem' }}>WhatsApp Alert Sent?</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                    <td style={{ padding: '0.75rem' }}>14-Sep-2023</td>
-                    <td style={{ padding: '0.75rem', color: 'var(--danger)', fontWeight: 500 }}>Absent</td>
-                    <td style={{ padding: '0.75rem', color: 'var(--success)' }}>Yes (Delivered)</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '500px' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-light)' }}>
+                      <th style={{ padding: '0.75rem' }}>Date</th>
+                      <th style={{ padding: '0.75rem' }}>Status</th>
+                      <th style={{ padding: '0.75rem' }}>WhatsApp Alert Sent?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
+                      <td style={{ padding: '0.75rem' }}>14-Sep-2023</td>
+                      <td style={{ padding: '0.75rem', color: 'var(--danger)', fontWeight: 500 }}>Absent</td>
+                      <td style={{ padding: '0.75rem', color: 'var(--success)' }}>Yes (Delivered)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
           
@@ -240,15 +242,16 @@ const StudentProfile = () => {
 
               {/* Marks Table */}
               <h3 style={{ marginBottom: '1rem', borderBottom: '1px solid #eee', paddingBottom: '0.5rem' }}>Scholastic Performance</h3>
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem' }}>
-                <thead>
-                  <tr style={{ backgroundColor: 'rgba(79, 70, 229, 0.1)' }}>
-                    <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'left' }}>Subject</th>
-                    <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'center' }}>Total Marks</th>
-                    <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'center' }}>Marks Obtained</th>
-                    <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'center' }}>Grade</th>
-                  </tr>
-                </thead>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem', minWidth: '500px' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: 'rgba(79, 70, 229, 0.1)' }}>
+                      <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'left' }}>Subject</th>
+                      <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'center' }}>Total Marks</th>
+                      <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'center' }}>Marks Obtained</th>
+                      <th style={{ padding: '0.75rem', border: '1px solid var(--border-light)', textAlign: 'center' }}>Grade</th>
+                    </tr>
+                  </thead>
                 <tbody>
                   <tr>
                     <td style={{ padding: '0.75rem', border: '1px solid var(--border-light)' }}>Mathematics</td>
@@ -270,6 +273,7 @@ const StudentProfile = () => {
                   </tr>
                 </tbody>
               </table>
+              </div>
 
               {/* Insights */}
               <h3 style={{ marginBottom: '1rem', borderBottom: '1px solid #eee', paddingBottom: '0.5rem' }}>Teacher's Remarks</h3>
