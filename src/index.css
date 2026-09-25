@@ -278,3 +278,5 @@ input, select, textarea {
 .btn-primary:hover { color: white !important; }
 
 .table-row-hover:hover { background-color: var(--bg-secondary); transition: background-color var(--transition-fast); }
+
+.modal-content { background-color: var(--bg-primary); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
