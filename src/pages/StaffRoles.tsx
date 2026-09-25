@@ -17,7 +17,7 @@ const StaffRoles = () => {
 
   return (
     <div className="staff-roles">
-      <header className="page-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header className="page-header">
         <div>
           <h1>Staff & Roles Management</h1>
           <p className="text-secondary">Create child admins, teachers and assign classes to them.</p>
@@ -31,46 +31,48 @@ const StaffRoles = () => {
         <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Shield size={20} color="var(--accent-primary)" /> Current Staff & Teachers
         </h3>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
-          <thead>
-            <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-light)' }}>
-              <th style={{ padding: '1rem' }}>Name</th>
-              <th style={{ padding: '1rem' }}>Email</th>
-              <th style={{ padding: '1rem' }}>Role</th>
-              <th style={{ padding: '1rem' }}>Assigned Class/Section</th>
-              <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {staffList.map((staff) => (
-              <tr key={staff.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
-                <td style={{ padding: '1rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: staff.role.includes('Admin') ? '#fef2f2' : '#e0e7ff', color: staff.role.includes('Admin') ? '#b91c1c' : 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-                    {staff.name.charAt(0)}
-                  </div>
-                  {staff.name}
-                </td>
-                <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{staff.email}</td>
-                <td style={{ padding: '1rem' }}>
-                  <span style={{ backgroundColor: staff.role.includes('Admin') ? '#fee2e2' : 'rgba(79, 70, 229, 0.1)', color: staff.role.includes('Admin') ? '#991b1b' : 'var(--accent-primary)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 600 }}>
-                    {staff.role}
-                  </span>
-                </td>
-                <td style={{ padding: '1rem', fontWeight: 500 }}>{staff.assignedTo}</td>
-                <td style={{ padding: '1rem', textAlign: 'right' }}>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-                    <button className="btn" style={{ padding: '0.5rem', color: 'var(--text-secondary)' }} title="Edit Access">
-                      <Edit size={16} />
-                    </button>
-                    <button className="btn" style={{ padding: '0.5rem', color: 'var(--danger)' }} title="Remove Staff">
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </td>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem', minWidth: '600px' }}>
+            <thead>
+              <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-light)' }}>
+                <th style={{ padding: '1rem' }}>Name</th>
+                <th style={{ padding: '1rem' }}>Email</th>
+                <th style={{ padding: '1rem' }}>Role</th>
+                <th style={{ padding: '1rem' }}>Assigned Class/Section</th>
+                <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {staffList.map((staff) => (
+                <tr key={staff.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
+                  <td style={{ padding: '1rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: staff.role.includes('Admin') ? '#fef2f2' : '#e0e7ff', color: staff.role.includes('Admin') ? '#b91c1c' : 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
+                      {staff.name.charAt(0)}
+                    </div>
+                    {staff.name}
+                  </td>
+                  <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{staff.email}</td>
+                  <td style={{ padding: '1rem' }}>
+                    <span style={{ backgroundColor: staff.role.includes('Admin') ? '#fee2e2' : 'rgba(79, 70, 229, 0.1)', color: staff.role.includes('Admin') ? '#991b1b' : 'var(--accent-primary)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                      {staff.role}
+                    </span>
+                  </td>
+                  <td style={{ padding: '1rem', fontWeight: 500 }}>{staff.assignedTo}</td>
+                  <td style={{ padding: '1rem', textAlign: 'right' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
+                      <button className="btn" style={{ padding: '0.5rem', color: 'var(--text-secondary)' }} title="Edit Access">
+                        <Edit size={16} />
+                      </button>
+                      <button className="btn" style={{ padding: '0.5rem', color: 'var(--danger)' }} title="Remove Staff">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Add Staff Modal */}

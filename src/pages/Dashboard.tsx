@@ -11,8 +11,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <header className="page-header">
-        <h1>Dashboard Overview</h1>
-        <p className="text-secondary">Welcome back, Admin. Here is what's happening today.</p>
+        <div>
+          <h1>Dashboard Overview</h1>
+          <p className="text-secondary">Welcome back, Admin. Here is what's happening today.</p>
+        </div>
       </header>
 
       <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>

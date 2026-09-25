@@ -75,7 +75,7 @@ const Attendance = () => {
   if (!isClassSelected) {
     return (
       <div className="attendance-module">
-        <header className="page-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <header className="page-header">
           <div>
             <h1>Daily Attendance</h1>
             <p className="text-secondary">Select a class to mark or view attendance</p>

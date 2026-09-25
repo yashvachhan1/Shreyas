@@ -110,7 +110,7 @@ const TestsMarks = () => {
   if (activeTest) {
     return (
       <div className="tests-marks-module">
-        <header className="page-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <header className="page-header" style={{ marginBottom: '1.5rem', gap: '1rem', flexWrap: 'wrap' }}>
           <button className="btn" onClick={() => setActiveTest(null)} style={{ padding: '0.5rem', backgroundColor: 'var(--bg-secondary)' }}>
             <ChevronLeft size={20} />
           </button>
@@ -182,7 +182,7 @@ const TestsMarks = () => {
   // --- DASHBOARD VIEW ---
   return (
     <div className="tests-marks-module">
-      <header className="page-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <header className="page-header">
         <div>
           <h1>Tests & Marks</h1>
           <p className="text-secondary">Schedule tests and manage student performance.</p>

@@ -14,7 +14,7 @@ const StudentList = () => {
 
   return (
     <div className="student-list">
-      <header className="page-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header className="page-header">
         <div>
           <h1>Student Directory</h1>
           <p className="text-secondary">Manage, view, and search all enrolled students.</p>
