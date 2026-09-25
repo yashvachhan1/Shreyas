@@ -207,6 +207,9 @@ input, select, textarea {
 }
 
 @media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
   .main-content {
     margin-left: 0;
     padding: 1.5rem 1rem;
